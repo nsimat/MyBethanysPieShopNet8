@@ -6,8 +6,9 @@ builder.Services.AddControllersWithViews(); // For MVC configuration
 
 var app = builder.Build();
 
-app.UseStaticFiles();
-if(app.Environment.IsDevelopment())
+app.UseStaticFiles();// For static files
+
+if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
