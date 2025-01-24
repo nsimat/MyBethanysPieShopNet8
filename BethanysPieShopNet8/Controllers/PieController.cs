@@ -1,4 +1,5 @@
 ﻿using BethanysPieShopNet8.Models;
+using BethanysPieShopNet8.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BethanysPieShopNet8.Controllers
@@ -10,16 +11,16 @@ namespace BethanysPieShopNet8.Controllers
 
         public PieController(IPieRepository pieRepository, ICategoryRepository categoryRepository)
         {
-            _pieRepository = pieRepository;
-            _categoryRepository = categoryRepository;
+            _pieRepository = pieRepository ?? throw new ArgumentNullException(nameof(pieRepository));
+            _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
         }
 
 
         public IActionResult List()
         {
-            ViewBag.Message = "Welcome to Bethanys Pie Shop";
             var pies = _pieRepository.AllPies;
-            return View(pies);
+            PieListViewModel pieListViewModel = new PieListViewModel(pies, "Cheese cakes");
+            return View(pieListViewModel);
         }
     }
 }
