@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container
-builder.Services.AddScoped<IPieRepository, MockPieRepository>(); // For dependency injection
-builder.Services.AddScoped<ICategoryRepository, MockCategoryRepository>(); // For dependency injection
+builder.Services.AddScoped<IPieRepository, PieRepository>(); // For dependency injection
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); // For dependency injection
 
 builder.Services.AddControllersWithViews(); // For MVC configuration
 builder.Services.AddDbContext<BethanysPieShopDbContext>(options =>
