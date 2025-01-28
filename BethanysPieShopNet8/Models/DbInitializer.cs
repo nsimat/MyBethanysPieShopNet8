@@ -1,6 +1,6 @@
 ﻿namespace BethanysPieShopNet8.Models
 {
-    public class DbInitializer
+    public static class DbInitializer
     {
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
@@ -48,14 +48,16 @@
             {
                 if (categories == null)
                 {
-                    var list = new Category[]
+                    var genresList = new Category[]
                     {
                         new Category { CategoryName = "Fruit pies", Description = "All-fruity pies" },
                         new Category { CategoryName = "Cheese cakes", Description = "Cheesy all the way" },
                         new Category { CategoryName = "Seasonal pies", Description = "Get in the mood for a seasonal pie" }
                     };
+
                     categories = new Dictionary<string, Category>();
-                    foreach (Category category in list)
+
+                    foreach (Category category in genresList)
                     {
                         categories.Add(category.CategoryName, category);
                     }
