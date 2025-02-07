@@ -19,7 +19,7 @@ namespace BethanysPieShopNet8.Controllers
         public IActionResult List()
         {
             var pies = _pieRepository.AllPies;
-            PieListViewModel pieListViewModel = new PieListViewModel(pies, "Cheese cakes");
+            PieListViewModel pieListViewModel = new PieListViewModel(pies, "All Pies");
             return View(pieListViewModel);
         }
 
