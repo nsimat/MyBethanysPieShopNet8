@@ -2,7 +2,7 @@
 {
     public interface IShoppingCart
     {
-        void AddToCart(Pie pie, int? amount);
+        void AddToCart(Pie pie);
         int RemoveFromCart(Pie pie);
         void ClearCart();
         List<ShoppingCartItem> GetShoppingCartItems();
