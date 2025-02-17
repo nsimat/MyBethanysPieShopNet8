@@ -8,6 +8,7 @@
     <link href='https://fonts.googleapis.com/css?family=Work+Sans' rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="~/css/litera-bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
 </head>
 <body>
     <div class="container">
@@ -34,6 +35,8 @@
                                 <a asp-controller="Pie" asp-action="List" class="nav-link">Pies</a>
                             </li>
                         </ul>
+                        <vc:shopping-cart-summary></vc:shopping-cart-summary>
+
                     </div>
                 </div>
             </nav>
