@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container
 builder.Services.AddScoped<IPieRepository, PieRepository>(); // For dependency injection
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); // For dependency injection
+builder.Services.AddScoped<IOrderRepository, OrderRepository>(); // For dependency injection
 
 builder.Services.AddScoped<IShoppingCart, ShoppingCart>(sp => ShoppingCart.GetCart(sp)); // For dependency injection
 builder.Services.AddSession(); // For session state
