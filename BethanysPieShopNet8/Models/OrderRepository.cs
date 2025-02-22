@@ -3,9 +3,9 @@
     public class OrderRepository : IOrderRepository
     {
         private readonly BethanysPieShopDbContext _bethanysPieShopDbContext;
-        private readonly ShoppingCart _shoppingCart;
+        private readonly IShoppingCart _shoppingCart;
 
-        public OrderRepository(BethanysPieShopDbContext bethanysPieShopDbContext, ShoppingCart shoppingCart)
+        public OrderRepository(BethanysPieShopDbContext bethanysPieShopDbContext, IShoppingCart shoppingCart)
         {
             _bethanysPieShopDbContext = bethanysPieShopDbContext ?? throw new ArgumentNullException(nameof(bethanysPieShopDbContext));
             _shoppingCart = shoppingCart ?? throw new ArgumentNullException(nameof(shoppingCart));
