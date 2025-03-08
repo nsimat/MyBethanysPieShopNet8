@@ -13,6 +13,7 @@ builder.Services.AddSession(); // For session state
 builder.Services.AddHttpContextAccessor(); // For session state
 
 builder.Services.AddControllersWithViews(); // For MVC configuration
+builder.Services.AddRazorPages(); // For Razor Pages configuration
 builder.Services.AddDbContext<BethanysPieShopDbContext>(options =>
 
  options.UseSqlServer(builder.Configuration.GetConnectionString("BethanysPieShopDbContext")));
@@ -31,6 +32,8 @@ app.MapDefaultControllerRoute(); // "{controller=Home}/{action=Index}/{id?}"
                                  //app.MapControllerRoute(
                                  //name: "default",
                                  //pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages(); // For Razor Pages
 
 DbInitializer.Seed(app); // Seed the database
 
