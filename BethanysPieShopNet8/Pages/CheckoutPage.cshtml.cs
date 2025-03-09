@@ -11,10 +11,11 @@ namespace BethanysPieShopNet8.Pages
 
         public CheckoutPageModel(IOrderRepository orderRepository, IShoppingCart shoppingCart)
         {
-            _orderRepository = orderRepository;
-            _shoppingCart = shoppingCart;
+            _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
+            _shoppingCart = shoppingCart ?? throw new ArgumentNullException(nameof(shoppingCart));
         }
 
+        [BindProperty]
         public Order Order { get; set; }
 
         public void OnGet()
