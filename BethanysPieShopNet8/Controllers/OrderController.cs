@@ -10,8 +10,8 @@ namespace BethanysPieShopNet8.Controllers
 
         public OrderController(IOrderRepository orderRepository, IShoppingCart shoppingCart)
         {
-            _orderRepository = orderRepository;
-            _shoppingCart = shoppingCart;
+            _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
+            _shoppingCart = shoppingCart ?? throw new ArgumentNullException(nameof(shoppingCart));
         }
 
         public IActionResult Checkout()
