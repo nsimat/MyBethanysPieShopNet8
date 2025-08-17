@@ -35,7 +35,7 @@ namespace BethanysPieShopNet8.Models
 
         public IEnumerable<Pie> SearchPies(string searchQuery)
         {
-            return _bethanysPieShopDbContext.Pies.Where(p => p.Name.Contains(searchQuery));
+            return _bethanysPieShopDbContext.Pies.Include(c => c.Category).Where(p => p.Name.Contains(searchQuery));
         }
     }
 }

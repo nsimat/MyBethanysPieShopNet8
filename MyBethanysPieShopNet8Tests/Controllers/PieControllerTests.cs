@@ -8,7 +8,7 @@ namespace BethanysPieShopNet8Tests.Controllers
     public class PieControllerTests
     {
         [Fact]
-        public void list_EmptyCategory_ReturnsAllPies()
+        public void List_EmptyCategory_ReturnsAllPies()
         {
             // Arrange
             var mockPieRepository = RepositoryMocks.GetPieRepository();

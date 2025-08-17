@@ -1,9 +1,10 @@
 ﻿using BethanysPieShopNet8.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// Configure services in the container
 builder.Services.AddScoped<IPieRepository, PieRepository>(); // For dependency injection
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>(); // For dependency injection
 builder.Services.AddScoped<IOrderRepository, OrderRepository>(); // For dependency injection
@@ -17,23 +18,40 @@ builder.Services.AddControllersWithViews(); // For MVC configuration
 
 builder.Services.AddRazorPages(); // For Razor Pages configuration
 
+builder.Services.AddOpenApi();
+
 // Add secrets.json to the configuration and database connection
 builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("secrets.json", optional: true, reloadOnChange: true);
 
 builder.Services.AddDbContext<BethanysPieShopDbContext>(options =>
  options.UseSqlServer(builder.Configuration.GetConnectionString("BethanysPieShopDbContext")));
 
-builder.Services.AddControllers(); // For API configuration
+builder.Services.AddControllers(). // For API configuration
+    AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        options.JsonSerializerOptions.WriteIndented = true; // Optional: for better readability
+
+    });
 
 var app = builder.Build();
+
+// Configure middleware & HTTP request pipeline
 
 app.UseStaticFiles();// For static files
 
 app.UseSession(); // For session state
 
+app.MapOpenApi();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/openapi/v1.json", "v1");
+    });
 }
 
 app.MapDefaultControllerRoute(); // "{controller=Home}/{action=Index}/{id?}"
