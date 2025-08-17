@@ -47,5 +47,10 @@ namespace BethanysPieShopNet8.Controllers
 
             return View(pie);
         }
+
+        public IActionResult Search()
+        {
+            return View();
+        }
     }
 }
