@@ -8,15 +8,21 @@ namespace BethanysPieShopNet8.Controllers
     {
         private readonly IPieRepository _pieRepository;
         private readonly IShoppingCart _shoppingCart;
+        private readonly ILogger<ShoppingCartController> _logger;
 
-        public ShoppingCartController(IPieRepository pieRepository, IShoppingCart shoppingCart)
+        public ShoppingCartController(IPieRepository pieRepository,
+                                      IShoppingCart shoppingCart,
+                                      ILogger<ShoppingCartController> logger)
         {
             _pieRepository = pieRepository ?? throw new ArgumentNullException(nameof(pieRepository));
             _shoppingCart = shoppingCart ?? throw new ArgumentNullException(nameof(shoppingCart));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public IActionResult Index()
         {
+            _logger.LogInformation("Loading the shopping cart page...");
+
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
 
@@ -27,6 +33,8 @@ namespace BethanysPieShopNet8.Controllers
 
         public RedirectToActionResult AddToShoppingCart(int pieId)
         {
+            _logger.LogInformation("Adding pie with ID: {pieId} to shopping cart...", pieId);
+
             var selectedPie = _pieRepository.AllPies.FirstOrDefault(p => p.PieId == pieId);
 
             if (selectedPie != null)
@@ -39,6 +47,8 @@ namespace BethanysPieShopNet8.Controllers
 
         public RedirectToActionResult RemoveFromShoppingCart(int pieId)
         {
+            _logger.LogInformation("Removing pie with ID: {pieId} from shopping cart...", pieId);
+
             var selectedPie = _pieRepository.AllPies.FirstOrDefault(p => p.PieId == pieId);
             if (selectedPie != null)
             {

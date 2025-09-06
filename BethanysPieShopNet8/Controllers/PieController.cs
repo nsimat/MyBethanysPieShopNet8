@@ -8,16 +8,22 @@ namespace BethanysPieShopNet8.Controllers
     {
         private readonly IPieRepository _pieRepository;
         private readonly ICategoryRepository _categoryRepository;
+        private readonly ILogger<PieController> _logger;
 
-        public PieController(IPieRepository pieRepository, ICategoryRepository categoryRepository)
+        public PieController(IPieRepository pieRepository,
+                             ICategoryRepository categoryRepository,
+                             ILogger<PieController> logger)
         {
             _pieRepository = pieRepository ?? throw new ArgumentNullException(nameof(pieRepository));
             _categoryRepository = categoryRepository ?? throw new ArgumentNullException(nameof(categoryRepository));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
 
         public IActionResult List(string category)
         {
+            _logger.LogInformation("Loading pies list...");
+
             IEnumerable<Pie> pies;
             string? currentCategory;
 
@@ -40,6 +46,8 @@ namespace BethanysPieShopNet8.Controllers
 
         public IActionResult Details(int id)
         {
+            _logger.LogInformation("Loading pie details with ID: {id}...", id);
+
             var pie = _pieRepository.GetPieById(id);
 
             if (pie == null)

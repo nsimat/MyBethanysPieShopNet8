@@ -10,10 +10,10 @@ namespace BethanysPieShopNet8.Controllers.Api
         private readonly IPieRepository _pieRepository;
         private readonly ILogger<SearchController> _logger;
 
-        public SearchController(IPieRepository ieRepository, ILogger<SearchController> logger)
+        public SearchController(IPieRepository pieRepository, ILogger<SearchController> logger)
         {
-            _pieRepository = ieRepository;
-            _logger = logger;
+            _pieRepository = pieRepository ?? throw new ArgumentNullException(nameof(pieRepository));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         // GET: /Search/

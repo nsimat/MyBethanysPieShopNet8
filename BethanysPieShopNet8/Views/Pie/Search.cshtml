@@ -2,6 +2,9 @@
     ViewData["Title"] = "Search Results";
 }
 
+<br />
+<br />
+
 <div class="" my-5="">
     <h3 class="" mb-4="">
         Enter your search query
@@ -9,7 +12,8 @@
     <input id="txtPieName" type="text" />
     <button id="searchButton" class="btn btn-secondary">Search</button>
 </div>
-<table id="tblPies" cellpadding="0" cellspacing="0">
+<br />
+<table id="tblPies" cellpadding="2" cellspacing="2">
     <tbody></tbody>
 </table>
 
@@ -18,7 +22,7 @@
     $(document).ready(function(){
       $("button").click(function(){
         var searchQuery = $.trim($("#txtPieName").val());
-            $("tbody").html("");
+            $("table tbody").html("");
             $.ajax({
                 type: "POST",
                 url: "/api/Search",
@@ -31,9 +35,9 @@
                     $.each(pies, function(i, pie){
                         $("tbody").append($("<tr>"));
                         appendElement = $("tbody tr").last();
-                        appendElement.append($("<td>").html('<img src=' + pie.imageThumbnailUrl() + ' width=250 class="rounded m-2>'));
-                        appendElement.append($("<td>").html('<h2><a href="/pie/details/' + pie.pieId + '">' + pie.name + '</a></h2>'));
-                        appendElement.append($("<td>").html(pie.price));
+                        appendElement.append($("<td>").html('<img src=' + pie.imageThumbnailUrl + '>'));
+                        appendElement.append($("<td>").html('<h2><a href="/pie/details/' + pie.pieId + '"><br>' + pie.name + '</a></h2>'));
+                        //appendElement.append($("<td>").html(pie.price));
                     });
                 },
                 error: function(xhr, status, error){
