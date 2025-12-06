@@ -5,10 +5,12 @@ namespace BethanysPieShopNet8.Controllers
 {
     public class OrderController : Controller
     {
+        // Private fields for the order repository, shopping cart, and logger
         private readonly IOrderRepository _orderRepository;
         private readonly IShoppingCart _shoppingCart;
         private readonly ILogger<OrderController> _logger;
 
+        // Constructor with dependency injection for IOrderRepository, IShoppingCart, and ILogger
         public OrderController(IOrderRepository orderRepository,
                                IShoppingCart shoppingCart,
                                ILogger<OrderController> logger)
@@ -18,12 +20,14 @@ namespace BethanysPieShopNet8.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
+        // Action method for displaying the checkout form
         public IActionResult Checkout()
         {
             _logger.LogInformation("Loading the checkout form...");
             return View();
         }
 
+        // Action method for processing the checkout form submission
         [HttpPost]
         public IActionResult Checkout(Order order)
         {
@@ -47,6 +51,7 @@ namespace BethanysPieShopNet8.Controllers
             return View(order);
         }
 
+        // Action method for displaying the checkout completion page
         public IActionResult CheckoutComplete()
         {
             _logger.LogInformation("Completing the final checkout...");

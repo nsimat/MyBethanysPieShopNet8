@@ -7,9 +7,11 @@ namespace BethanysPieShopNet8.Controllers.Api
     [ApiController]
     public class SearchController : ControllerBase
     {
+        // Private fields for the pie repository and logger
         private readonly IPieRepository _pieRepository;
         private readonly ILogger<SearchController> _logger;
 
+        // Constructor with dependency injection for IPieRepository and ILogger
         public SearchController(IPieRepository pieRepository, ILogger<SearchController> logger)
         {
             _pieRepository = pieRepository ?? throw new ArgumentNullException(nameof(pieRepository));
@@ -116,6 +118,7 @@ namespace BethanysPieShopNet8.Controllers.Api
             }
         }
 
+        // POST: /Search/
         [HttpPost]
         [EndpointSummary("Search for pies by name or description")]
         [EndpointDescription("Searches for pies by name or description. Returns an array of pies or empty arrayr.")]

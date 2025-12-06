@@ -34,6 +34,13 @@ builder.Services.AddControllers(). // For API configuration
 
     });
 
+// Add Swagger
+builder.Services.AddEndpointsApiExplorer();// For API configuration(ajout)
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "Bethany's Pie Shop API", Version = "v1" });
+});
+
 var app = builder.Build();
 
 // Configure middleware & HTTP request pipeline
@@ -47,8 +54,8 @@ app.MapOpenApi();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-
-    app.UseSwaggerUI(options => options.SwaggerEndpoint("/openapi/v1.json", "v1"));
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.MapDefaultControllerRoute(); // "{controller=Home}/{action=Index}/{id?}"
@@ -61,3 +68,5 @@ app.MapRazorPages(); // For Razor Pages
 DbInitializer.Seed(app); // Seed the database
 
 await app.RunAsync();
+
+Console.WriteLine("Bethany's Pie Shop Web App has been stopped...");

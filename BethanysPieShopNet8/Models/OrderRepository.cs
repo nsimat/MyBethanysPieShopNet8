@@ -2,14 +2,18 @@
 {
     public class OrderRepository : IOrderRepository
     {
+        // Private fields for the database context and shopping cart
         private readonly BethanysPieShopDbContext _bethanysPieShopDbContext;
         private readonly IShoppingCart _shoppingCart;
 
+        // Constructor with dependency injection for BethanysPieShopDbContext and IShoppingCart
         public OrderRepository(BethanysPieShopDbContext bethanysPieShopDbContext, IShoppingCart shoppingCart)
         {
             _bethanysPieShopDbContext = bethanysPieShopDbContext ?? throw new ArgumentNullException(nameof(bethanysPieShopDbContext));
             _shoppingCart = shoppingCart ?? throw new ArgumentNullException(nameof(shoppingCart));
         }
+
+        // Method to create an order
         public void CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;

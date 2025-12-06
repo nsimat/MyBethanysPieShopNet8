@@ -6,10 +6,12 @@ namespace BethanysPieShopNet8.Controllers
 {
     public class PieController : Controller
     {
+        // Private fields for the pie repository, category repository, and logger
         private readonly IPieRepository _pieRepository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly ILogger<PieController> _logger;
 
+        // Constructor with dependency injection for IPieRepository, ICategoryRepository, and ILogger
         public PieController(IPieRepository pieRepository,
                              ICategoryRepository categoryRepository,
                              ILogger<PieController> logger)
@@ -20,6 +22,7 @@ namespace BethanysPieShopNet8.Controllers
         }
 
 
+        // Action method for listing pies, optionally filtered by category
         public IActionResult List(string category)
         {
             _logger.LogInformation("Loading pies list...");
@@ -31,19 +34,20 @@ namespace BethanysPieShopNet8.Controllers
             {
                 pies = _pieRepository.AllPies.OrderBy(p => p.PieId);
                 currentCategory = "All pies";
-            }
-            else
-            {
-                pies = _pieRepository.AllPies.Where(p => p.Category.CategoryName == category)
-                    .OrderBy(p => p.PieId);
+                return View(new PieListViewModel(pies, currentCategory));
 
-                currentCategory = _categoryRepository.AllCategories
-                    .FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
             }
+
+            pies = _pieRepository.AllPies.Where(p => p.Category.CategoryName == category)
+                .OrderBy(p => p.PieId);
+
+            currentCategory = _categoryRepository.AllCategories
+                .FirstOrDefault(c => c.CategoryName == category)?.CategoryName;
 
             return View(new PieListViewModel(pies, currentCategory));
         }
 
+        // Action method for displaying details of a specific pie by ID
         public IActionResult Details(int id)
         {
             _logger.LogInformation("Loading pie details with ID: {id}...", id);
@@ -56,6 +60,7 @@ namespace BethanysPieShopNet8.Controllers
             return View(pie);
         }
 
+        // Action method for displaying the search page
         public IActionResult Search()
         {
             return View();

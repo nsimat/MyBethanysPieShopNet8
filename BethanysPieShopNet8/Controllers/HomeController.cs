@@ -6,14 +6,18 @@ namespace BethanysPieShopNet8.Controllers
 {
     public class HomeController : Controller
     {
+        // Private fields for the pie repository and logger
         private readonly IPieRepository _pieRepository;
         private readonly ILogger<HomeController> _logger;
 
+        // Constructor with dependency injection for IPieRepository and ILogger
         public HomeController(IPieRepository pieRepository, ILogger<HomeController> logger)
         {
             _pieRepository = pieRepository ?? throw new ArgumentNullException(nameof(pieRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
+
+        // Action method for the Index page
         public IActionResult Index()
         {
             _logger.LogInformation("Loading Home page with Pies of the Week...");

@@ -2,6 +2,7 @@
 {
     public static class DbInitializer
     {
+        // Method to seed the database with initial data
         public static void Seed(IApplicationBuilder applicationBuilder)
         {
             BethanysPieShopDbContext context =
@@ -40,8 +41,10 @@
             context.SaveChanges();
         }
 
+        // Static dictionary to hold categories
         private static Dictionary<string, Category>? categories;
 
+        // Property to get the categories, initializing them if necessary
         public static Dictionary<string, Category> Categories
         {
             get
