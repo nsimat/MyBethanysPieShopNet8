@@ -84,6 +84,12 @@ body {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+footer {
+    padding: 10px;
+    gap: 10px;
+    border-radius: 8px;
+}
+
 hr {
     margin: 1rem 0;
     color: inherit;
@@ -5229,6 +5235,7 @@ textarea.form-control-lg {
     margin-bottom: 1rem;
     border: 1px solid transparent;
     border-radius: 0.25rem;
+    background-color: #C87D52;
 }
 
 .alert-heading {
@@ -5283,7 +5290,7 @@ textarea.form-control-lg {
 
 .alert-info {
     color: #055160;
-    background-color: #cff4fc;
+    background-color: #ffd0c9 /*#cff4fc*/;
     border-color: #b6effb;
 }
 

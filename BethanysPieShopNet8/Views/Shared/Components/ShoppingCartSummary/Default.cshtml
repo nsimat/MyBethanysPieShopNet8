@@ -4,12 +4,10 @@
 {
     <ul class="navbar-nav mb-2 mb-lg-0">
         <li class="nav-item">
-            <a class="nav-link">
-                <span>
-                    <i class="fa-sharp fa-solid fa-cart-shopping"></i>
-                </span>
+            <a class="nav-link" asp-controller="ShoppingCart" asp-action="Index">
+                <i class="fs-4 bi bi-cart text-bg-primary"></i>
                 <span id="cart-status">
-                    @Model.ShoppingCart.ShoppingCartItems.Count
+                    (@Model.ShoppingCart.ShoppingCartItems.Count)
                 </span>
             </a>
         </li>
